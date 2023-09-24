@@ -1,0 +1,33 @@
+---
+- name:
+  hosts: localhost
+  become: true
+  become_user: root
+  gather_facts: true
+  tasks:
+    - name:
+      command: 'df -h'
+      register: dfh_output
+    - name:
+      debug:
+        var: dfh_output.stdout_lines
+    - name:
+      file:
+        path: /tmp/status.txt
+        state: touch
+#    - name: List files in /tmp
+#      find:
+#        paths: /tmp
+#      register: tmp_files
+#
+#    - name: Display files in /tmp
+#      debug:
+#        var: tmp_files.files
+
+    - name: List files in /tmp
+      command: ls -l /tmp
+      register: ls_output
+
+    - name: Display ls -l output
+      debug:
+        var: ls_output.stdout_lines
