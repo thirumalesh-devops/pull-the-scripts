@@ -1,15 +1,23 @@
-FROM ubuntu:latest
+FROM httpd:latest
 
-RUN apt-get -y update
- 
-RUN apt-get install -y apache2 curl
+LABEL version="1.0" description="My custom httpd image"
 
-EXPOSE 80
+MAINTAINER Thirumalesh_Venkatapuram
 
-WORKDIR /var/www/html
+RUN yum update -y
 
-COPY index.html /var/www/html/index.html 
+RUN yum install httpd -y
 
-ENTRYPOINT ["/usr/sbin/apache2ctl"]
+RUN systemctl enable httpd
 
-CMD ["-D", "FOREGROUND"]
+RUN systemctl start httpd
+
+RUN system status httpd
+
+WORKDIR /var/www/html/
+
+COPY ./index.html /var/www/html/
+
+EXPOSE 5000
+
+CMD ["httpd-foreground"]
