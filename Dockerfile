@@ -4,8 +4,6 @@ LABEL version="1.0" description="My custom httpd image"
 
 MAINTAINER Thirumalesh_Venkatapuram
 
-RUN yum update -y
-
 RUN yum install httpd -y
 
 RUN systemctl enable httpd
