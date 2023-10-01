@@ -8,6 +8,6 @@ WORKDIR /var/www/html/
 
 COPY ./index.html /var/www/html/
 
-EXPOSE 5000
+EXPOSE 5005
 
 CMD ["httpd-foreground"]
